@@ -27,3 +27,7 @@ Content-Type: application/json
     "email":"hasmininanthan023@gmail.com"
 
 }
+
+###
+get http://localhost:3000/hello
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Imhhc21pbmkiLCJwYXNzd29yZCI6IjEyMzQ1NiIsIm5hbWUiOiJIYXNtaW5pIiwiZW1haWwiOiJoYXNtaW5pbmFudGhhbjAyM0BnbWFpbC5jb20iLCJpYXQiOjE2ODEzNjk0Mzd9.NJqFZR8XRRaXOEMqFH3OYEzjTacluZO3VQcPK2qM6LY

@@ -1,7 +1,7 @@
 let dbUsers = [
   {
       username: "hasmini",
-      password: "H@s230798",
+      password: "123456",
       name: "Hasmini",
       email: "hasmininanthan023@gmail.com"
   
@@ -48,9 +48,21 @@ function register (reqUsername,reqPassword,reqName,reqEmail){
 
 }
 
+//try to login
+//console.log(login("Hasmini","123456"))
+//console.log(login("utem","password"))
+//console.log(login("john","password"))
+//console.log(login("ali","password"))
+
+register("UTEM", "password", "fkekk","fkekk@m.com" )
+//try to login
+//console.log(login("Hasmini","123456"))
+
+
 const express = require('express')
 const app = express()
 const port = 3000
+
 
 app.use(express.json())
 
@@ -58,8 +70,10 @@ app.post('/login', (req, res) => {
     console.log(req.body)
 
     let result = login(req.body.username,req.body.password)
-
-    res.send(result)
+    //res.send(result)
+    
+    let token = generateToken(result)
+    res.send(token)
 })
 
 app.get('/', (req, res) => {
@@ -86,3 +100,35 @@ app.post('/register', (req, res) => {
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
 })
+
+app.get('/hello', verifyToken, (req, res, next) => {
+  res.send('Hiiiiiii')
+})
+
+
+const jwt = require('jsonwebtoken');
+function generateToken(userData){
+  const token = jwt.sign(
+    userData,
+    'inipassword'
+  );
+
+  return token
+
+}
+
+function verifyToken(req, res, next){
+  let header = req.headers.authorization
+  console.log(header)
+
+  let token=header.split(' ')[1]
+
+  jwt.verify(token,'inipassword',function(err,decoded){
+  if(err){
+    res.send("Invalid Token")
+  }
+  
+  req.user=decoded
+  next()
+});
+}
